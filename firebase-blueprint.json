@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the Design dept. platform.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "The unique identifier for the user."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The user's email address."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The user's display name."
+        },
+        "photoURL": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the user's profile photo."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the user account was created."
+        }
+      },
+      "required": ["uid", "email", "createdAt"]
+    },
+    "Design": {
+      "title": "Design",
+      "description": "A design posted by a user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string", "format": "uri" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorPhoto": { "type": "string", "format": "uri" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "likes": { "type": "number" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["title", "imageUrl", "authorId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data."
+    },
+    "/designs/{designId}": {
+      "schema": "Design",
+      "description": "Public designs shared by users."
+    }
+  }
+}
